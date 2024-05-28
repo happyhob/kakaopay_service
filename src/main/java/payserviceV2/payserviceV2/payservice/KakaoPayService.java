@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import payserviceV2.payserviceV2.controller.KakaoPayRequest;
 import payserviceV2.payserviceV2.patdto.KakaoApproveResponse;
 import payserviceV2.payserviceV2.patdto.KakaoCancelResponse;
 import payserviceV2.payserviceV2.patdto.KakaoReadyResponse;
@@ -22,16 +23,16 @@ public class KakaoPayService {
     static final String admin_Key = "b01106db62adfb693b2b994ee78a97fa";
     private KakaoReadyResponse kakaoReady;
 
-    public KakaoReadyResponse kakaoPayReady() {
+    public KakaoReadyResponse kakaoPayReady(KakaoPayRequest request) {
 
         // 카카오페이 요청 양식
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.add("cid", cid);
         parameters.add("partner_order_id", "order_id_1234");
         parameters.add("partner_user_id", "user_id_1234");
-        parameters.add("item_name", "test item");
-        parameters.add("quantity", "1"); // 주문 수량은 정수로 전달
-        parameters.add("total_amount", "10000"); // 총 금액
+        parameters.add("item_name", request.getItem_name());
+        parameters.add("quantity", String.valueOf(request.getQuantity())); // 주문 수량은 정수로 전달
+        parameters.add("total_amount", String.valueOf(request.getTotal_amount())); // 총 금액
         parameters.add("vat_amount", "1000"); // 부가세
         parameters.add("tax_free_amount", "0"); // 상품 비과세 금액
         parameters.add("approval_url", "http://localhost:8080/payment/success"); // 성공 시 redirect url

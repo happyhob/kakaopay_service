@@ -22,9 +22,17 @@ public class KakaoPayController {
      * 결제요청
      */
     @PostMapping("/ready")
-    public ResponseEntity readyToKakaoPay() {
-        KakaoReadyResponse kakaoReadyResponse = kakaoPayService.kakaoPayReady();
-        return ResponseEntity.ok(kakaoReadyResponse); // KakaoReadyResponse를 ResponseEntity로 감싸서 반환
+    public ResponseEntity readyToKakaoPay(@RequestBody KakaoPayRequest request) {
+//        KakaoReadyResponse kakaoReadyResponse = kakaoPayService.kakaoPayReady();
+//        return ResponseEntity.ok(kakaoReadyResponse); // KakaoReadyResponse를 ResponseEntity로 감싸서 반환
+        // Log the request data for debugging purposes
+        System.out.println("Received request: " + request);
+
+        // Call the service layer to process the payment request
+        KakaoReadyResponse kakaoReadyResponse = kakaoPayService.kakaoPayReady(request);
+
+        // Return the response as ResponseEntity
+        return ResponseEntity.ok(kakaoReadyResponse);
     }
 
     /**
