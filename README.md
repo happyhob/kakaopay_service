@@ -10,8 +10,8 @@
 
 
 [환경구성 및 사용법]
-java 17 버전을 사용
-intellij 툴 사용
-빌드도구 : gradle
+java 17 버전을 사용 \n
+intellij 툴 사용\n
+빌드도구 : gradle \n
 
 사용법 : 해당 프로젝트를 로드하여 gradle.bulid를 실행시키면 된다.
